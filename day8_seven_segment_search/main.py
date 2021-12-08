@@ -36,24 +36,6 @@ reference = {
 
 def decode_signal(signal: str) -> int:
     signals = signal.split()
-    one = set([el for el in signals if len(el) == 2][0])
-    four = set([el for el in signals if len(el) == 4][0])
-    seven = set([el for el in signals if len(el) == 3][0])
-
-    counter = Counter(puzzle_line[0])
-    print(counter)
-    a = one.symmetric_difference(seven).pop()
-    c = [k for k, v in counter.items() if ((v == 8) and (v!=a)) ][0]
-    e = [k for k, v in counter.items() if v == 4][0]
-    b = [k for k, v in counter.items() if v == 6][0]
-    f = [k for k, v in counter.items() if v == 9][0]
-    print(four)
-    print(b, c, f)
-    print([el for el in four if el not in [b, c, f]])
-    print('')
-
-    #d = 
-    #d = diff 0 and 8
     pass
 
 for line in line_segments:
