@@ -29,6 +29,17 @@ def draw_lines(lines:list) -> dict:
         elif line.y1 == line.y2:
             for j in range(min(line.x1, line.x2), max(line.x1, line.x2) + 1):
                 grid[(j, line.y1)] += 1
+        # part2
+        # diagonal
+        else:
+            # rule for only exactly 45 degree means that the x and y coordinate shift the exact same distance
+            if abs(line.x1 - line.x2) == abs(line.y1 - line.y2):
+                x = 1 if line.x2 > line.x1 else -1
+                y = 1 if line.y2 > line.y1 else -1
+                for i in range(abs(line.x2-line.x1)+1):
+                    grid[(line.x1+i*x, line.y1+i*y)] += 1
+
+            
     return grid
 
 with open("day5_hydrothermal_venture/input.txt") as f:
