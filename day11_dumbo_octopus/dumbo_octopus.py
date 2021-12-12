@@ -41,15 +41,24 @@ def update_step(positions: dict) -> dict:
     post_flash_positions.update({p: 0 for p, val in post_flash_positions.items() if val > 9}) 
     return n_flashes, post_flash_positions
 
-flashes_count = 0 
-for i in range(100):
-    flashes, positions = update_step(positions)
-    print('after step', i + 1)
-    print(flashes)
-    print(positions)
-    print('')
-    flashes_count += flashes
+# part one
+# flashes_count = 0 
+# for i in range(100):
+#     flashes, positions = update_step(positions)
+#     print('after step', i + 1)
+#     print(flashes)
+#     print(positions)
+#     print('')
+#     flashes_count += flashes
     
-print(flashes_count)
+# print(flashes_count)
 
 # part two
+i= 0
+while True: 
+    flashes, positions = update_step(positions)
+    i += 1
+    if flashes == 100:
+        break
+
+print(i)
