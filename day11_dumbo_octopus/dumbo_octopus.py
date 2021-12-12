@@ -52,46 +52,4 @@ for i in range(100):
     
 print(flashes_count)
 
-# from itertools import product
-# from collections import Counter
-
-
-# FILENAME = '../data/d11'
-
-
-# def neighborhood(x, y): 
-#     return [(x + a, y + b) for a, b in product((-1, 0, 1), repeat=2) if (a, b) != (0, 0)]
-
-
-# def flash(H, flashed): 
-#     flashing = [p for p, val in H.items() if val > 9 and p not in flashed]    
-#     if flashing: 
-#         for p in flashing: 
-#             H.update({q: H[q] + 1 for q in neighborhood(*p) if q in H.keys()}) 
-#         flash(H, flashing + flashed)
-
-
-# def step(H): 
-#     H.update({p: val + 1 for p, val in H.items()}) 
-#     flash(H, list())         
-#     H.update({p: 0 for p, val in H.items() if val > 9}) 
-#     return H
-
-
-# with open(FILENAME, 'r') as f: 
-#     H = dict() 
-#     for y, line in enumerate(f):
-#         for x, val in enumerate(line.strip()): 
-#             H[x, y] = int(val)
-
-# # PART 1
-# tot_flashes, steps_num = 0, 0 
-# while steps_num < 100: 
-#     steps_num += 1 
-#     tot_flashes += Counter(step(H).values())[0] 
-# print(tot_flashes)
-
-# # PART 2
-# while Counter(step(H).values())[0] != len(H): 
-#     steps_num += 1 
-# print(steps_num + 1)
+# part two
