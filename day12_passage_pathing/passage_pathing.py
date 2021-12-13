@@ -1,5 +1,4 @@
 from itertools import combinations
-from os import P_NOWAITO
 
 with open("day12_passage_pathing/example_input.txt") as f:
     lines = f.read().splitlines()
