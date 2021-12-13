@@ -1,36 +1,51 @@
 import re
+import numpy as np
 
-with open("day13_transparent_origami/example_input.txt") as f:
+def count_dots(paper):
+    return np.count_nonzero(paper == 1)
+
+def fold_up(paper, y):
+    m_1 = paper[:y]
+    m_2 = np.flip(paper[y+1:], axis=0) #flip vertically to simulate the fold
+    summed_matrix = m_1 + m_2
+    summed_matrix[summed_matrix > 1] = 1
+    return summed_matrix
+
+def fold_left(paper, x):
+    m_1, m_2 = np.hsplit(paper, [x]) 
+    m_2 = np.flip(m_2[:,1:], axis=1) # since we split on the line, the line is included in m_2 -> remove that column and flip horizontally
+    summed_matrix = m_1 + m_2 
+    summed_matrix[summed_matrix > 1] = 1
+    return summed_matrix
+
+def fold(paper, fold_instruction):
+    if fold_instruction[0] == 'x':
+        folded_paper = fold_left(paper, int(fold_instruction[1]))
+    elif fold_instruction[0] == 'y':
+        folded_paper = fold_up(paper, int(fold_instruction[1]))
+    return folded_paper
+
+with open("day13_transparent_origami/input.txt") as f:
     lines = f.read().splitlines()
 
 rows = [row.split(',') for row in lines]
 
-paper = [(int(row[0]), int(row[1])) for row in rows if len(row) == 2]
+marks = [(int(row[0]), int(row[1])) for row in rows if len(row) == 2]
 fold_instructions = [row[0] for row in rows if len(row) == 1 and 'fold' in row[0]]
 
-positions = dict()
+# dot is 0
+# # is 1
+# create empty matrix as grid
+x_max = max([i[0] for i in marks]) + 1
+y_max = max([i[1] for i in marks]) + 1
+paper = np.zeros((y_max, x_max)) 
 
-#for max x 
-for i in range(max([i[0] for i in paper]) + 1):
-    # for max y
-    for j in range(max([i[1] for i in paper]) + 1):
-        positions[(i, j)] = '.'
+for mark in marks:
+    paper[mark[1]][mark[0]] = 1
 
-positions.update({k:'#' for k, v in positions.items() if k in paper})
+for instruction in fold_instructions[:1]:
+    instruction = re.findall(r'(\w+)=(\d+)', instruction)[0]
+    folded_paper = fold(paper, instruction)
 
-def fold_up(paper, y):
-    pass
-
-def fold_left(paper, x):
-    pass
-
-def fold(paper, fold_instruction):
-    if fold_instruction[0] :
-        print('fold left')
-    elif 'y' in fold_instruction:
-        #for i in range(2, 4)
-        print('fold up')
-
-for instruction in fold_instructions:
-    print(re.findall(r'(\w+)=(\d+)', instruction)[0])
-    #print(fold(positions, instruction))
+print(folded_paper)
+print(count_dots(folded_paper))
