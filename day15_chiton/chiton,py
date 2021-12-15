@@ -1,0 +1,29 @@
+import numpy as np
+import networkx as nx
+with open("day15_chiton/example_input.txt") as f:
+    lines = f.read().splitlines()
+
+rows = [[int(number) for number in row] for row in lines]
+
+def step(position, grid, visited):
+    # get adjacent cells of position
+    # (greedy) get the lowest value that is NOT in visited  & index is closest to the exit.
+    for adjacent in adjacents_cells:
+        adjacent_pos = tuple(map(sum, zip(key, adjacent)))
+        # check if adjacent pos out of bounds
+        if (all(i >= 0  for i in adjacent_pos)) & (all(i < 10  for i in adjacent_pos)):
+            pass
+    pass
+
+def traverse_path(position, grid, visited):
+    visited = [position]
+    print(visited)
+
+
+matrix = np.array([np.array(xi) for xi in rows])
+
+G = nx.from_numpy_matrix(matrix)
+for edge in G.edges(data=True):
+    print(edge)
+print(G.nodes)
+print(list(nx.shortest_path_length(G, 0, 9 )))
