@@ -21,7 +21,7 @@ class TargetArea:
     min_y: float
     max_y: float
 
-def step(probe):
+def step(probe: Probe) -> Probe:
     # The probe's x position increases by its x velocity.
     # The probe's y position increases by its y velocity.
     # Due to drag, the probe's x velocity changes by 1 toward the value 0; that is, it decreases by 1 if it is greater than 0, increases by 1 if it is less than 0, or does not change if it is already 0.
@@ -38,19 +38,12 @@ def step(probe):
 
     return probe
 
-# i = 0
-# # while the probe has not passed the target area 
-# while probe.x_position < target_area.max_x:
-#     step(probe)
-#     i += 1
-#     if probe.in_target_area(target_area.min_x, target_area.max_x, target_area.min_y, target_area.max_y):
-#         print(probe)
-#         print(i)
-#         break
 
 # part one - grid search
 def check_inbounds(probe: Probe, target: TargetArea) -> bool:
-    if probe.x_position > target.max_x or probe.y_position < target.max_y:
+    #print(probe, target)
+    # 0. > 157 
+    if probe.x_position > target.max_x or probe.y_position < target.min_y:
         return False
     return True
 
@@ -67,17 +60,19 @@ def probe_max_height(probe: Probe, target: TargetArea) -> float:
 # x_velo = 6
 # y_velo = 9
 # probe = Probe(x_position=0., y_position=0., x_velocity=x_velo, y_velocity=y_velo)
-target_area = TargetArea(min_x=20, max_x=30, min_y=-10, max_y=-5)
-
 # y = probe_max_height(probe, target_area)
 # print(y)
 
-grid_search_min = 5
-grid_search_max = 30
+
+# example input
+# target_area = TargetArea(min_x=20, max_x=30, min_y=-10, max_y=-5)
+
+# real input
+target_area = TargetArea(min_x=102, max_x=157, min_y=-90, max_y=146)
 
 res = []
-for x in range(5, 10):
-    for y in range(-10, 30):
+for x in range(0, 200):
+    for y in range(-200, 200):
         probe = Probe(x_position=0., y_position=0., x_velocity=x, y_velocity=y)
         res.append((x, y,  probe_max_height(probe, target_area)))
 
