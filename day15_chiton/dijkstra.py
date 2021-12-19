@@ -5,14 +5,16 @@
 
 from math import inf
 
-wmat = [[0, 2, 0, 0, 0, 1, 0, 0],
-        [2, 0, 2, 2, 4, 0, 0, 0],
-        [0, 2, 0, 0, 3, 0, 0, 1],
-        [0, 2, 0, 0, 4, 3, 0, 0],
-        [0, 4, 3, 4, 0, 0, 7, 0],
-        [1, 0, 0, 3, 0, 0, 5, 0],
-        [0, 0, 0, 0, 7, 5, 0, 6],
-        [0, 0, 1, 0, 0, 0, 6, 0]]
+wmat = [
+    [0, 2, 0, 0, 0, 1, 0, 0],
+    [2, 0, 2, 2, 4, 0, 0, 0],
+    [0, 2, 0, 0, 3, 0, 0, 1],
+    [0, 2, 0, 0, 4, 3, 0, 0],
+    [0, 4, 3, 4, 0, 0, 7, 0],
+    [1, 0, 0, 3, 0, 0, 5, 0],
+    [0, 0, 0, 0, 7, 5, 0, 6],
+    [0, 0, 1, 0, 0, 0, 6, 0],
+]
 
 
 def find_all(wmat, start, end=-1):
@@ -26,22 +28,22 @@ def find_all(wmat, start, end=-1):
     Args:
     wmat    --  weighted graph's adjacency matrix
     start   --  paths' first vertex
-    end     --  (optional) path's end vertex. Return just the 
+    end     --  (optional) path's end vertex. Return just the
                 distance and its path
     Exceptions:
     Index out of range, Be careful with start and end vertices
     """
     n = len(wmat)
 
-    dist = [inf]*n
+    dist = [inf] * n
     dist[start] = wmat[start][start]  # 0
 
-    spVertex = [False]*n
-    parent = [-1]*n
+    spVertex = [False] * n
+    parent = [-1] * n
 
-    path = [{}]*n
+    path = [{}] * n
 
-    for count in range(n-1):
+    for count in range(n - 1):
         minix = inf
         u = 0
 
@@ -52,7 +54,7 @@ def find_all(wmat, start, end=-1):
 
         spVertex[u] = True
         for v in range(n):
-            if not(spVertex[v]) and wmat[u][v] != 0 and dist[u] + wmat[u][v] < dist[v]:
+            if not (spVertex[v]) and wmat[u][v] != 0 and dist[u] + wmat[u][v] < dist[v]:
                 parent[v] = u
                 dist[v] = dist[u] + wmat[u][v]
 
