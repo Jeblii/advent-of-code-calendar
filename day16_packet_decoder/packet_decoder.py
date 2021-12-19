@@ -68,7 +68,7 @@ def probe_max_height(probe: Probe, target: TargetArea) -> float:
 # target_area = TargetArea(min_x=20, max_x=30, min_y=-10, max_y=-5)
 
 # real input
-target_area = TargetArea(min_x=102, max_x=157, min_y=-90, max_y=146)
+target_area = TargetArea(min_x=102, max_x=157, min_y=-146, max_y=-90)
 
 res = []
 for x in range(0, 200):
