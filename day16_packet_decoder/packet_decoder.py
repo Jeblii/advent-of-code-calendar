@@ -66,6 +66,7 @@ def probe_max_height(probe: Probe, target: TargetArea) -> float:
 
 # real input
 target_area = TargetArea(min_x=102, max_x=157, min_y=-146, max_y=-90)
+example_target_area = TargetArea(min_x=20, max_x=30, min_y=-10, max_y=-5)
 
 res = []
 for x in range(0, 200):
@@ -74,3 +75,19 @@ for x in range(0, 200):
         res.append((x, y, probe_max_height(probe, target_area)))
 
 print(max(res, key=itemgetter(2)))
+
+# part two
+def probe_in_target_area(probe: Probe, target: TargetArea) -> float:
+    while check_inbounds(probe, target):
+        probe = step(probe)
+        if probe.in_target_area(target.min_x, target.max_x, target.min_y, target.max_y):
+            return 1
+    return 0
+
+res = 0
+for x in range(0, 200):
+    for y in range(-200, 200):
+        probe = Probe(x_position=0.0, y_position=0.0, x_velocity=x, y_velocity=y)
+        res += probe_in_target_area(probe, target_area)
+
+print(res)
