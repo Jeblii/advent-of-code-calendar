@@ -84,6 +84,7 @@ def probe_in_target_area(probe: Probe, target: TargetArea) -> float:
             return 1
     return 0
 
+
 res = 0
 for x in range(0, 200):
     for y in range(-200, 200):
